@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<body class="letrasFormulario " onclick="apagaModal()">
+<style>
+
+#modal {
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  position: fixed;
+  top: 10;
+  left: 10;
+  height: 40vh;
+  width: 90vw;
+  transition: all .5s;
+}
+
+.hoverWrapper:hover #hoverShow1 {
+ display: block;
+}
+
+.hoverWrapper #hoverShow1 {
+ display: none;
+ position: absolute;
+ background-color: #ff0000;
+ width: 250px;
+ height: 250px;
+ left: 200px;
+ top: 100px;
+}
+
+</style>
+
+
+
+
+<h2>Ahorro con el sistema inteligente de efectivo</h2>
+
+
+
+
+<form >
+<div class="hoverWrapper">ver modal 1
+ <div id="hoverShow1">1) this is shown only on hover</div>
+</div>
+ 
+  
+<div>  
+
+ <div id="modal"style="display:none";>
+  <p> otromodal</p>
+</div>
+
+
+
+Minutos que tardas en iniciar la caja: 
+<b id="mensaje" onclick= muestramensage >
+ (i)
+ </b><br>
+</div>
+
+
+   <input type="range" name="ini" id="minutosdeinicio" 
+ value="5" min="10" max="60"
+ oninput="inicio.value = minutosdeinicio.value">
+   <output id="inicio"></output><br>
+ 
+
+ <br>
+ <div> 
+ Minutos que tardas en cerrar la caja:
+<b id="mensajecierre" onclick= muestramensagecierre >
+ (i)
+ </b><br>
+</div>
+ 
+  <input type="range" name="cierre" id="minutosdecierre" 
+ value="5" min="10" max="60" 
+ oninput="cierr.value = minutosdecierre.value">
+   <output  id="cierr"></output><br>
+ 
+
+ <br>
+
+<div> 
+  Dias que abre mensualmente   :
+  <b id="mensajeabre" onclick= muestraMensajediasqueabre >
+ (i)
+ </b><br>
+</div>
+
+ 
+ <input type="range" name="abrem" id="diasabremensualmente" 
+ value="5" min="5" max="30" 
+ oninput="abre.value = diasabremensualmente.value">
+   <output  id="abre"></output><br>
+ 
+ <br>
+ 
+ 
+ <div> 
+  Posibles descuadres mensuales   :
+  <b id="mensajedescuadre" onclick= muestraMensajedescusdresmensuales >
+ (i)
+ </b><br>
+</div>
+
+
+ <input type="range" name="dec" id="descuadresmensuales" 
+ value="5" min="0" max="30" 
+ oninput="descuadre.value = descuadresmensuales.value">
+   <output  id="descuadre"></output><br>
+ 
+ <br>
+ 
+ 
+  <div> 
+  Posibles perdidas incontroladas   :
+    <b id="mensajeperdidas" onclick= muestraMensajeperdidasincontroladas >
+ (i)
+ </b><br>
+</div>
+ 
+  <input type="range" name="mess" id="perdidasincontroladas" 
+ value="5" min="0" max="30" 
+ oninput="perdidas.value = perdidasincontroladas.value">
+   <output  id="perdidas"></output><br>
+ 
+ <br>
+
+
+<input  class="button" type="button" value="Calcular" onclick="Calcular();">
+
+
+
+</form>
+<p id="calculo" ></p>
+
+
+
+</body>
+
+
+
+
+<script>
+
+
+
+function muestraMensajeiniciocaja() {
+  //alert('Ingresa los minutos que tardas en cargar el cajon con el dinero\n');
+enciendeModal();
+}
+		
+ var muestramensage = document.getElementById("mensaje").onmouseover = muestraMensajeiniciocaja;
+ 
+ function muestraMensajecierre() {
+  alert('Ingresa los minutos que tardas en cerrar la caja \nCuadrar todas las cuentas');
+}
+ muestramensagecierre =document.getElementById("mensajecierre").onmouseover =  muestraMensajecierre;
+ 
+ 
+ function muestraMensajediasqueabre() {
+  alert('Dias que abre mensualmente \nDato necesario el calculo en nuestra formula');
+}
+ muestramensagecierre =document.getElementById("mensajeabre").onmouseover =  muestraMensajediasqueabre;
+ 
+  function muestraMensajedescusdresmensuales() {
+  alert('Dinero que te descuadra en la caja diario \nDato necesario para reportarle un mejor calculo');
+}
+ muestramensagecierre =document.getElementById("mensajedescuadre").onmouseover =  muestraMensajedescusdresmensuales;
+ 
+  function muestraMensajeperdidasincontroladas() {
+  alert('Dinero de posibles perdidas incontroladas \nDato necesario para reportarle un mejor calculo');
+}
+ muestramensagecierre =document.getElementById("mensajeperdidas").onmouseover =  muestraMensajeperdidasincontroladas;
+ 
+ function apagaModal() {
+document.getElementById("modal").style.display = "none";
+
+}
+ function enciendeModal() {
+document.getElementById("modal").style.display = "block";
+
+}
+ 
+ 
+ 
+ 
+ function Calcular() {
+apagaModal();
+ var minutosInicio = document.getElementById('minutosdeinicio').value;  //inicio de la caja
+ var minutosdeCierre = document.getElementById('minutosdecierre').value;  // cierre de la caja
+ var perdidasIncontroladas = document.getElementById('perdidasincontroladas').value; //perdidas incontroladas
+ var descuadresMensuales = document.getElementById('descuadresmensuales').value; //descuadres mensuales
+ var diasAbremensual = document.getElementById('diasabremensualmente').value;// dias que habre mensualmente
+
+ 
+ var aperturacierresDiarios = 1;// Aperturas y cierres diarios
+ var salarioTrabajador = 1500; // salario del tranajador 
+ var horasMensualestrabajador = 162; // horas mensuales del trabajador
+
+ 
+ 
+    var descuadres =(descuadresMensuales*diasAbremensual);
+    var perdidasincontroladasMensuales =(perdidasIncontroladas*diasAbremensual);
+    var horas_Trabajador =(salarioTrabajador /horasMensualestrabajador);
+ // hayar la media multiplicar por  dias de semana por mes y por 60 par apasar a horas 3*6*4/60)
+   
+    var p = (parseFloat(minutosInicio)+parseFloat(minutosdeCierre)+aperturacierresDiarios/3*diasAbremensual/60);
+    var precioporHoratrabajador = (p*horas_Trabajador); //precio por impoerte hora trabajador
+    var descuadresmensualesMasperdidas =(descuadres+perdidasincontroladasMensuales);
+    var costeTotal =( precioporHoratrabajador+descuadres+perdidasincontroladasMensuales);
+    var beneficioMensual =(costeTotal-261.28); // precio total descontando cajon(Ganancias)
+    var beneficioenCincoaños =( beneficioMensual*60); // Ahorro en cinco años precio por( Ganancias*60)
+    if( costeTotal>261.28){
+      
+     
+      var x =document.getElementById('calculo').innerHTML =
+   
+      "<h3><b>Estudio de ahorro</b></h3><br/>"+
+      "<b>Tiempo medio empleado</b><br>"+p.toFixed()
+      +" horas al mes<br/>"
+      +"<b>Coste horas personal</b> <br>"+ precioporHoratrabajador.toFixed()+" € al mes<br/>"
+      +"<b>Descuadres mensuales y perdidas incontroladas</b> <br>"+descuadresmensualesMasperdidas.toFixed()
+      +" € al mes<br/>"
+      +"<b>Coste total </b><br> "+costeTotal.toFixed()+" € al mes<br/>"
+     +"<h3><b>Si contratas el cajon inteligente tendras :</b></h3><br/>"
+      +"<b>Beneficio mensual </b> <br> "+ beneficioMensual.toFixed()+" € <br/>"
+      +"<b>Beneficio en cinco años </b> <br>"+beneficioenCincoaños.toFixed()+" € <br/>";
+        
+      
+
+  }else if( costeTotal<261.28){
+    document.getElementById('calculo').innerHTML ="Revisa los campos"
+}
+
+
+
+
+
+
+}
+
+</script>
+
+
+
+
+   
+
+
+</html>
